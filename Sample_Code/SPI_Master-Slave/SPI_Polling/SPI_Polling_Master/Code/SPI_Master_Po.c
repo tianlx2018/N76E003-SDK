@@ -63,6 +63,27 @@ void SPI_Initial(void)
     SPICLK_DIV16;                        				// Select SPI clock 
     set_SPIEN;                                  // Enable SPI function 
     clr_SPIF;
+
+    P15 = 0;
+}
+
+void Test_Sending_SPI(void)
+{
+    uint8_t id = 0;
+
+    P15 = 0;
+      
+    SPDR = 0x80;
+    while(!(SPSR & SET_BIT7));
+    clr_SPIF;
+    SPDR = 0x00;
+    while(!(SPSR & SET_BIT7));
+    clr_SPIF;
+
+    id = SPDR;
+
+    P15 = 1;
+    printf ("\nBMI ID %x!\n",id);
 }
 //-----------------------------------------------------------------------------------------------------------
 void Start_Sending_SPI(UINT8 *pu8MID,UINT8 *pu8DID)
@@ -134,14 +155,16 @@ void main(void)
     InitialUART0_Timer1(115200);             /* 9600 Baud Rate*/
 
 
-		SPI_Initial();
+    SPI_Initial();
 
-		Start_Sending_SPI(&u8MID,&u8DID);
-        
-    if((u8MID != 0x4F)&&(u8DID != 0x4E))
-        SPI_Error();
+    Test_Sending_SPI();
 
-    printf ("\nSPI Test OK!\n");
+    // Start_Sending_SPI(&u8MID,&u8DID);
+    
+    // if((u8MID != 0x4F)&&(u8DID != 0x4E))
+    //     SPI_Error();
+
+    // printf ("\nSPI Test OK!\n");
     while(1);                                    // SPI transmission finish and P0.6 flash
 }
 //-----------------------------------------------------------------------------------------------------------
