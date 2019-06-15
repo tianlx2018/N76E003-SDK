@@ -35,7 +35,7 @@
 #include "Function_define.h"
 
 #define I2C_CLOCK               13
-#define EEPROM_SLA              0xA4
+#define EEPROM_SLA              0xA0
 #define EEPROM_WR               0
 #define EEPROM_RD               1
 #define ERROR_CODE              0x78
