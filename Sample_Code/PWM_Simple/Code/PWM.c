@@ -107,33 +107,35 @@ void main(void)
     Set_All_GPIO_Quasi_Mode;
 
 		PWM0_P12_OUTPUT_ENABLE;
-		PWM2_P10_OUTPUT_DISABLE;
-		PWM4_P01_OUTPUT_ENABLE;
-		PWM5_P03_OUTPUT_ENABLE;
+		//PWM2_P10_OUTPUT_DISABLE;
+		//PWM4_P01_OUTPUT_ENABLE;
+		// PWM5_P03_OUTPUT_ENABLE;
 	
 		PWM_IMDEPENDENT_MODE;
 		PWM_CLOCK_DIV_8;
-		PWMPH = 0x07;
-		PWMPL = 0xCF;
+		PWMPH = 0x01;
+		PWMPL = 0xF3;
 /**********************************************************************
 	PWM frequency = Fpwm/((PWMPH,PWMPL) + 1) <Fpwm = Fsys/PWM_CLOCK_DIV> 
-								= (16MHz/8)/(0x7CF + 1)
-								= 1KHz (1ms)
+								= (16MHz/8)/(0x1F3 + 1)
+								= 4KHz (0.25ms)
 ***********************************************************************/
 	
 		PWM0H = 0x00;					
-		PWM0L = 0xCF;
-		PWM2H = 0x01;						
-		PWM2L = 0xCF;
+		PWM0L = 0xF9;//0x1f3/2->0xf9	50% PWM
+
+
+		//PWM2H = 0x01;						
+		//PWM2L = 0xCF;
 		
-		set_SFRPAGE;						//PWM4 and PWM5 duty seting is in SFP page 1
-		PWM4H = 0x03;						
-		PWM4L = 0xCF;
-		PWM5H = 0x05;						
-		PWM5L = 0xCF;
-		clr_SFRPAGE;											
+		//set_SFRPAGE;						//PWM4 and PWM5 duty seting is in SFP page 1
+		// PWM4H = 0x03;						
+		// PWM4L = 0xCF;
+		// PWM5H = 0x05;						
+		// PWM5L = 0xCF;
+		// clr_SFRPAGE;											
 // PWM output inversly enable 
-		PWM2_OUTPUT_INVERSE;
+		// PWM2_OUTPUT_INVERSE;
 
 //-------- PWM start run--------------
     set_LOAD;
