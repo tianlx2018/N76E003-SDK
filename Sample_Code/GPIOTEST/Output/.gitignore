@@ -1,0 +1,7 @@
+*.obj
+/GPIO
+/GPIO.hex
+/GPIO.lnp
+/GPIO.obj
+/GPIO.plg
+/STARTUP.obj

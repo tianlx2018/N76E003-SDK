@@ -351,6 +351,11 @@
               <FileType>1</FileType>
               <FilePath>.\Code\GPIO.C</FilePath>
             </File>
+            <File>
+              <FileName>temperature.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Code\temperature.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
