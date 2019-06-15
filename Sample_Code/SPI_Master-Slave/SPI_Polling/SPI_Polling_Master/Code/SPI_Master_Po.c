@@ -56,11 +56,11 @@ void SPI_Initial(void)
    
     clr_LSBFE;                                  // MSB first         
 
-    clr_CPOL;                                   // The SPI clock is low in idle mode
+    set_CPOL;                                   // The SPI clock is low in idle mode
     set_CPHA;                                   // The data is sample on the second edge of SPI clock 
     
     set_MSTR;                                   // SPI in Master mode 
-    SPICLK_DIV16;                        				// Select SPI clock 
+    SPICLK_DIV2;                        				// Select SPI clock 
     set_SPIEN;                                  // Enable SPI function 
     clr_SPIF;
 
