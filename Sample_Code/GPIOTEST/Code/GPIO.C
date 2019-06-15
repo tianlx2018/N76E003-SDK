@@ -18,7 +18,7 @@
 #include "Function_define.h"
 #include "Common.h"
 #include "Delay.h"
-
+#include "temperature.h"
 //*****************  The Following is in define in Fucntion_define.h  ***************************
 //****** Always include Function_define.h call the define you want, detail see main(void) *******
 //***********************************************************************************************
@@ -107,7 +107,8 @@
 The main C function.  Program execution starts
 here after stack initialization.
 ------------------------------------------------*/
-
+		unsigned short voltage = 16;
+	    unsigned char temp = 0;
 void main (void) 
 {
 //	unsigned char temp;
@@ -158,18 +159,35 @@ void main (void)
 #if 1
   
 		  //test H3 brash charging and turn on MOSFET
+		  P04 = 0;
+		  Timer0_Delay1ms(500);
+
+
+
+	while(voltage < 3000)
+	{
+		/* code */
+		P04 = 1;
+	  	temp = ntc_voltage_to_temp(voltage);
+	  	P04 = 0;
+		voltage += 10;
+
+		Timer0_Delay1ms(500);
+	}
+	
   while(1)
   {
-  	if(P11 == 1)
-	{
-	P04 = 1;
-	P15 = 0;  //turn on mosfet
-	}
-	else
-	{
-	P04 = 0;
-	P15 = 1;
-	}
+
+  	// if(P11 == 1)
+	// {
+	// P04 = 1;
+	// P15 = 0;  //turn on mosfet
+	// }
+	// else
+	// {
+	// P04 = 0;
+	// P15 = 1;
+	// }
 
 
 //		clr_GPIO1;											// Tiny board GPIO1 LED define
